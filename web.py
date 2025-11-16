@@ -263,8 +263,16 @@ INDEX_HTML = """
         {% endif %}
 
         <div class="footer">
-            Author: Yifei Wei · Contact: yifei.wei@student.uq.edu.au<br>
-            Supervisor: Jihui (Aimee) Zhang · Contact: jihuiaimee.zhang@uq.edu.au
+            <div class="footer-row">
+                <span class="footer-label">Author:</span>
+                <span> Yifei Wei</span>
+                <span class="footer-email">yifei.wei@student.uq.edu.au</span>
+            </div>
+            <div class="footer-row">
+                <span class="footer-label">Supervisor:</span>
+                <span> Jihui (Aimee) Zhang</span>
+                <span class="footer-email">jihuiaimee.zhang@uq.edu.au</span>
+            </div>
         </div>
     </div>
 </div>
