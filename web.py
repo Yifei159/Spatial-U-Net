@@ -268,11 +268,6 @@ INDEX_HTML = """
                 <span> Yifei Wei</span>
                 <span class="footer-email">yifei.wei@student.uq.edu.au</span>
             </div>
-            <div class="footer-row">
-                <span class="footer-label">Supervisor:</span>
-                <span> Jihui (Aimee) Zhang</span>
-                <span class="footer-email">jihuiaimee.zhang@uq.edu.au</span>
-            </div>
         </div>
     </div>
 </div>
