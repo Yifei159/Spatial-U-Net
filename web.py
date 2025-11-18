@@ -264,7 +264,6 @@ INDEX_HTML = """
 
         <div class="footer">
             <div class="footer-row">
-                <span class="footer-label">Author:</span>
                 <span> Yifei Wei</span>
                 <span class="footer-email">yifei.wei@student.uq.edu.au</span>
             </div>
