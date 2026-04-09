@@ -63,7 +63,12 @@ def build_examples():
                 }
             )
 
-    examples.sort(key=lambda x: x["name"])
+    example_order = {
+        "Example_02": 0,  # -25 dB first
+        "Example_01": 1,  # -20 dB second
+    }
+    examples.sort(key=lambda x: example_order.get(x["name"], 99))
+
     return examples
 
 
