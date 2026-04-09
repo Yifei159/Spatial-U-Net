@@ -8,14 +8,13 @@ app = Flask(__name__)
 SNR_INFO = {
     "Example_01": "-20 dB",
     "Example_02": "-25 dB",
-    "Example_03": "-30 dB",
 }
 
-AUDIO_EXTENSIONS = {".wav", ".mp3", ".flac", ".ogg", ".m4a"}
+AUDIO_EXTENSIONS = {".wav"}
 
 NAME_MAP = {
     "noisy_input": "Input",
-    "enhanced_output": "Enhanced Output of Spatial-U-Net",
+    "enhanced_output": "Enhanced Output of Lifting-Based U-Net",
     "speech_only": "Clean Target",
 }
 
@@ -51,7 +50,7 @@ def build_examples():
         order = {
             "Clean Target": 0,
             "Input": 1,
-            "Enhanced Output of Spatial-U-Net": 2,
+            "Enhanced Output of Lifting-Based U-Net": 2,
         }
         audio_files.sort(key=lambda x: order.get(x["label"], 99))
 
@@ -73,7 +72,7 @@ INDEX_HTML = """
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Deep Learning-Based Multi-Channel Speech Enhancement for Low Signal-to-Noise Ratio Scenario</title>
+    <title>Lifting-Based U-Net for Intelligibility-Preserving Multi-Channel Speech Enhancement</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -212,6 +211,15 @@ INDEX_HTML = """
             color: #b8aedc;
             text-align: right;
         }
+        .footer-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: flex-end;
+        }
+        .footer-email {
+            opacity: 0.95;
+        }
         @media (min-width: 768px) {
             .page {
                 max-width: 720px;
@@ -227,7 +235,7 @@ INDEX_HTML = """
 <div class="page">
     <div class="shell">
         <div class="header">
-            <h1 class="title">Deep Learning-Based Multi-Channel Speech Enhancement for Low Signal-to-Noise Ratio Scenario</h1>
+            <h1 class="title">Lifting-Based U-Net for Intelligibility-Preserving Multi-Channel Speech Enhancement</h1>
         </div>
 
         {% if examples %}
@@ -257,14 +265,14 @@ INDEX_HTML = """
         </div>
         {% else %}
         <div class="no-examples">
-            No audio files were found in <code>Example_01</code>, <code>Example_02</code>, or <code>Example_03</code>.
+            No audio files were found in <code>Example_01</code> or <code>Example_02</code>.
             Please ensure these folders exist and contain valid audio files.
         </div>
         {% endif %}
 
         <div class="footer">
             <div class="footer-row">
-                <span> Yifei Wei</span>
+                <span>Yifei Wei</span>
                 <span class="footer-email">yifei.wei@student.uq.edu.au</span>
             </div>
         </div>
@@ -275,15 +283,16 @@ INDEX_HTML = """
 """
 
 
-
 @app.route("/")
 def index():
     examples = build_examples()
     return render_template_string(INDEX_HTML, examples=examples)
 
+
 @app.route("/audio/<path:path>")
 def serve_audio(path):
     return send_from_directory(BASE_DIR, path, as_attachment=False)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
